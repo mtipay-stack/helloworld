@@ -1,0 +1,31 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @student %>
+
+<h3>List of Subjects:</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Section</th>
+      <th>Teacher</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @student.classlists.each do | classlist | %>
+      <tr>
+        <td><%= student.name %></td>
+        <td><%= student.program %></td>
+        <td><%= student.year_level %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= link_to "Edit this student", edit_student_path(@student) %> |
+  <%= link_to "Back to students", students_path %>
+
+  <%= button_to "Destroy this student", @student, method: :delete %>
+</div>
