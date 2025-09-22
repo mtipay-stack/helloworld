@@ -1,4 +1,4 @@
 class Teacher < ApplicationRecord
   belongs_to :department
-  has_many :subject, dependent: :destroy
+  has_many :subjects, dependent: :destroy
 end

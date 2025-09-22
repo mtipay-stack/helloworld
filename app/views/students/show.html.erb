@@ -2,26 +2,28 @@
 
 <%= render @student %>
 
-<h3>List of Subjects:</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Section</th>
-      <th>Teacher</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @student.classlists.each do | classlist | %>
+  <h3> List of subjects </h3>
+  <table>
+    <thead>
       <tr>
-        <td><%= student.name %></td>
-        <td><%= student.program %></td>
-        <td><%= student.year_level %></td>
+        <th>Section</th>
+        <th>Subject</th>
+        <th>Units</th>
+        <th>Teacher</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @student.classlists.each do |classlist| %>
+        <tr>
+          <td><%= classlist.section.name %></td>
+          <td><%= classlist.section.subject.name %></td>
+          <td><%= classlist.section.subject.number_of_units %></td>
+          <td><%= classlist.section.subject.teacher.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <table>
 
 <div>
   <%= link_to "Edit this student", edit_student_path(@student) %> |

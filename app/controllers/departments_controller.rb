@@ -39,7 +39,7 @@ class DepartmentsController < ApplicationController
   def update
     respond_to do |format|
       if @department.update(department_params)
-        format.html { redirect_to @department, notice: "Department was successfully updated.", status: :see_other }
+        format.html { redirect_to @department, notice: "Department was successfully updated." }
         format.json { render :show, status: :ok, location: @department }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class DepartmentsController < ApplicationController
     @department.destroy!
 
     respond_to do |format|
-      format.html { redirect_to departments_path, notice: "Department was successfully destroyed.", status: :see_other }
+      format.html { redirect_to departments_path, status: :see_other, notice: "Department was successfully destroyed." }
       format.json { head :no_content }
     end
   end
