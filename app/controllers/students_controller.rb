@@ -25,6 +25,9 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
+
+        @student.department.increment!(:student_count)
+
         format.html { redirect_to @student, notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
       else
@@ -51,6 +54,8 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy!
 
+    @student.department.decrement!(:student_count)
+
     respond_to do |format|
       format.html { redirect_to students_path, status: :see_other, notice: "Student was successfully destroyed." }
       format.json { head :no_content }
@@ -68,3 +73,4 @@ class StudentsController < ApplicationController
       params.expect(student: [ :name, :year_level, :program, :department_id ])
     end
 end
+
