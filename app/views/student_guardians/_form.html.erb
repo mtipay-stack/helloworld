@@ -15,16 +15,6 @@
     <%= form.label :relationship, style: "display: block" %>
     <%= form.text_field :relationship %>
   </div>
-
-  <div>
-    <%= form.label :student_id, style: "display: block" %>
-    <%= form.text_field :student_id %>
-  </div>
-
-  <div>
-    <%= form.label :guardian_id, style: "display: block" %>
-    <%= form.text_field :guardian_id %>
-  </div>
   
     <div>
     <%= form.label :student_id, "Student", style: "display: block" %>
@@ -35,11 +25,6 @@
     <%= form.label :guardian_id, "Guardian", style: "display: block" %>
     <%= form.collection_select :guardian_id, Guardian.all, :id, :name, prompt: "Select a guardian" %>
   </div>
-  <div>
-    <%= form.label :relationship, style: "display: block" %>
-    <%= form.text_field :relationship %>
-  </div>
-
 
 
   <div>

@@ -23,8 +23,8 @@ class StudentGuardiansController < ApplicationController
   def create
     @student_guardian = StudentGuardian.new(student_guardian_params)
 
-       @student_guardian.guardian.update(:number_of_students)
-       @student_guardian.student.update(:number_of_guardians) 
+       @student_guardian.guardian.increment!(:number_of_students)
+       @student_guardian.student.increment!(:number_of_guardians) 
 
     respond_to do |format|
       if @student_guardian.save
@@ -55,8 +55,8 @@ class StudentGuardiansController < ApplicationController
 
     
     @student_guardian.destroy!
-    @student_guardian.guardian.decrement(:number_of_students)
-    @student_guardian.student.decrement(:number_of_guardians) 
+    @student_guardian.guardian.decrement!(:number_of_students)
+    @student_guardian.student.decrement!(:number_of_guardians) 
 
     
     respond_to do |format|
