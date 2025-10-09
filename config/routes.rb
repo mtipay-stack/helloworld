@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :student_guardians
+  resources :guardians
+  resources :relationships
   resources :staffs
   resources :classlists
   resources :sections
