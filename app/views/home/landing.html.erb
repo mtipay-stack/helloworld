@@ -1,0 +1,26 @@
+<!-- Hero Section -->
+<section
+  class="d-flex flex-column justify-content-center align-items-center text-center text-light"
+  style="min-height: 100vh; background: linear-gradient(135deg, #142864, #1f3d8f);"
+>
+  <div class="container"> 
+    <div class="mb-4">
+      <%= image_tag "logo.png", alt: "School Logo", size: "90x90", class: "mb-3 rounded shadow-lg bg-light p-2" %>
+      <h1 class="fw-bold display-4 text-uppercase">School Manager</h1>
+      <p class="lead text-light-50 mt-3">
+        A smart and efficient system for managing students, teachers, and classes — empowering education through technology.
+      </p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex justify-content-center gap-4 mt-4">
+      <%= link_to "Register", register_path, class: "btn btn-danger btn-lg shadow" %>
+      <%= link_to "Login", students_path, class: "btn btn-outline-light btn-lg shadow" %>
+    </div>
+
+    <!-- Footer text -->
+    <p class="mt-5 text-light-50 small">
+      © <%= Time.current.year %> School Manager — Developed for modern schools.
+    </p>
+  </div>
+</section>

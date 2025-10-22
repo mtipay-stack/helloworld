@@ -1,34 +1,47 @@
-<p style="color: green"><%= notice %></p>
-
 <% content_for :title, "Students" %>
 
+<div class="page-bg min-vh-100 py-4">
 
-<h1>List Students</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Year Level</th>
-      <th>Program</th>
-      <th>Units</th>
-      <th>Total Assessment</th>
-      <th>Department</th>
-      <th>Show</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @students.each do |student| %>
-      <tr>
-        <td><%= student.name %></td>
-        <td><%= student.year_level %></td>
-        <td><%= student.program %></td>
-        <td><%= student.number_of_units %></td>
-        <td><%= student.total_assessment %></td>
-        <td><%= student.department.name %></td>
-        <td><%= link_to "Show this student", student %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class="page-card container p-4 rounded shadow-sm">
+  <div class="text-center mb-4">
+  <h1 class="fw-bold text-primary">🎓 Student Records Portal</h1>
+  <p class="text-secondary fst-italic">Empowering academic management with style and simplicity</p>
+</div>
 
-<%= link_to "New student", new_student_path %>
+    
+    
+    <table class="table table-bordered table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Year Level</th>
+          <th>Program</th>
+          <th>Units</th>
+          <th>Total Assessment</th>
+          <th>Department</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+          <tr>
+            <td><%= student.name %></td>
+            <td><%= student.year_level %></td>
+            <td><%= student.program %></td>
+            <td><%= student.number_of_units %></td>
+            <td><%= number_to_currency(student.total_assessment, unit: "₱", precision: 0) %></td>
+            <td><%= student.department.name %></td>
+            <td>
+              <%= link_to "Show", student, class: "btn btn-sm btn-primary me-1" %>
+              <%= link_to "Edit", edit_student_path(student), class: "btn btn-sm btn-warning me-1" %>
+              <%= link_to "Delete", student, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= link_to "➕ New Student", new_student_path, class: "btn btn-success mt-3" %>
+
+  </div>
+</div>

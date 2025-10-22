@@ -1,10 +1,330 @@
 /*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
+ * Application-wide styles
  */
+
+/* === Smooth transition for mode switching === */
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+  background-color: #f8f9fa; /* light background */
+  color: #212529; /* dark text */
+}
+
+/* === Dark Mode Body === */
+body.dark-mode {
+  background-color: #121212; /* deep dark background */
+  color: #f8f9fa; /* light text */
+}
+
+/* === Navbar Styling === */
+.custom-navbar {
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.4s ease-in-out;
+}
+
+/* Dark mode navbar override */
+body.dark-mode .custom-navbar {
+  background: linear-gradient(90deg, #1f1f1f, #2b2b2b);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+}
+
+/* Navbar links */
+.custom-navbar .nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.custom-navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 0%;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover {
+  color: #ffeb3b !important;
+}
+
+.custom-navbar .nav-link:hover::after {
+  width: 80%;
+}
+
+/* Navbar link dark mode colors */
+body.dark-mode .custom-navbar .nav-link {
+  color: #f8f9fa !important;
+}
+
+body.dark-mode .custom-navbar .nav-link:hover {
+  color: #ffd54f !important;
+}
+
+/* Logo hover effect */
+.custom-navbar .navbar-brand img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Make navbar-brand text glow softly */
+.custom-navbar .navbar-brand span {
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* === Table Hover Effect === */
+.table tbody tr:hover {
+  background-color: #e3f2fd !important;
+  transform: scale(1.01);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Dark mode table styling */
+body.dark-mode .table {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+}
+
+body.dark-mode .table tbody tr:hover {
+  background-color: #2a2a2a !important;
+}
+
+/* === Optional: Buttons === */
+.btn {
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .btn-outline-light {
+  border-color: #f8f9fa;
+  color: #f8f9fa;
+}
+
+body.dark-mode .btn-outline-light:hover {
+  background-color: #f8f9fa;
+  color: #121212;
+}
+
+/* === Dark-mode overrides for Bootstrap bg-* utilities ===
+   These force the bg-info-subtle / bg-white / bg-light colors to switch
+   when body.dark-mode is present. Use !important here to override
+   Bootstrap utility rules (which are quite specific). === */
+
+body.dark-mode .bg-info-subtle,
+body.dark-mode .bg-info,
+body.dark-mode .bg-light {
+  background-color: #0f1720 !important;   /* dark slate */
+  color: #e6eef6 !important;
+}
+
+body.dark-mode .bg-white,
+body.dark-mode .container,
+body.dark-mode .card,
+body.dark-mode .card-body {
+  background-color: #161616 !important;   /* dark card background */
+  color: #e6eef6 !important;
+  border-color: #2a2a2a !important;
+}
+
+body.dark-mode .table {
+  background-color: transparent !important;
+  color: #e6eef6 !important;
+}
+
+body.dark-mode .table thead,
+body.dark-mode .table thead th,
+body.dark-mode .table thead tr {
+  background-color: #1f1f1f !important;
+  color: #f1f1f1 !important;
+  border-color: #333 !important;
+}
+
+/* make rows slightly lighter on hover in dark mode */
+body.dark-mode .table tbody tr:hover {
+  background-color: #242424 !important;
+}
+
+/* adjust page container shadow and border so they look good in dark */
+body.dark-mode .shadow-sm {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important;
+}
+
+/* buttons: keep contrast in dark mode (you already had rules, but reinforce) */
+body.dark-mode .btn-primary { background-color: #1976d2 !important; border-color: #1976d2 !important; }
+body.dark-mode .btn-warning { background-color: #f0b429 !important; border-color: #f0b429 !important; }
+body.dark-mode .btn-danger  { background-color: #c62828 !important; border-color: #c62828 !important; }
+body.dark-mode .btn-success { background-color: #2e7d32 !important; border-color: #2e7d32 !important; }
+
+/* Optional: change site background (if your pages use bg-info-subtle on the wrapper) */
+body.dark-mode {
+  background-color: #0b0f12 !important;
+}
+
+/* default (light) */
+.page-bg { background-color: #e6fafc; }
+.page-card { background-color: #ffffff; }
+
+/* dark mode */
+body.dark-mode .page-bg { background-color: #071018; }
+body.dark-mode .page-card { background-color: #121212; color: #e6eef6; border-color: #2a2a2a; }
+
+/* === Fix for Show/Edit/New student pages in dark mode === */
+body.dark-mode .card,
+body.dark-mode .card-body,
+body.dark-mode .container,
+body.dark-mode .bg-white,
+body.dark-mode .bg-light,
+body.dark-mode .border {
+  background-color: #1a1a1a !important;
+  color: #e6eef6 !important;
+  border-color: #2a2a2a !important;
+}
+
+/* Make labels and form text readable */
+body.dark-mode label,
+body.dark-mode p,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode span,
+body.dark-mode strong {
+  color: #e6eef6 !important;
+}
+
+/* Form inputs and select boxes in dark mode */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #121212 !important;
+  color: #e6eef6 !important;
+  border-color: #333 !important;
+}
+
+body.dark-mode input:focus,
+body.dark-mode select:focus,
+body.dark-mode textarea:focus {
+  background-color: #1f1f1f !important;
+  color: #fff !important;
+  border-color: #66afe9 !important;
+  outline: none !important;
+  box-shadow: 0 0 5px #66afe9 !important;
+}
+
+/* Fix table borders and hover states in show view */
+body.dark-mode .table {
+  background-color: #1a1a1a !important;
+  color: #e6eef6 !important;
+  border-color: #333 !important;
+}
+
+body.dark-mode .table tbody tr:hover {
+  background-color: #242424 !important;
+}
+
+.page-card { background-color: #ffffff; color: #000; }
+body.dark-mode .page-card { background-color: #1a1a1a; color: #e6eef6; border-color: #333; }
+
+/* 🌞 LIGHT MODE */
+body {
+  background: linear-gradient(135deg, #e0f7fa, #bbdefb);
+  min-height: 100vh;
+  color: #0d1b2a;
+  transition: all 0.3s ease;
+}
+
+.registration-page {
+  min-height: 80vh;
+}
+
+.reg-card {
+  width: 220px;
+  height: 150px;
+  border: 2px solid;
+  border-radius: 15px;
+  background-color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reg-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  background: linear-gradient(135deg, #f5f5f5, #ffffff);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+/* 🌙 DARK MODE SUPPORT */
+body.dark-mode {
+  background: linear-gradient(135deg, #121212, #1e1e1e);
+  color: #f1f1f1;
+}
+
+body.dark-mode .reg-card {
+  background-color: #1f1f1f;
+  color: #e6e6e6;
+  border-color: #3a3a3a;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .reg-card:hover {
+  background: linear-gradient(135deg, #2c2c2c, #3a3a3a);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode h1 {
+  color: #4da3ff;
+}
+
+body {
+  background: linear-gradient(135deg, #d0eaff, #a3c4f3);
+  font-family: "Poppins", sans-serif;
+}
+
+.registration-container {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.page-title {
+  font-weight: 700;
+  font-size: 2rem;
+  color: #004aad;
+  margin-bottom: 40px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.reg-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.reg-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 25px 40px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  color: #004aad;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.reg-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}

@@ -1,37 +1,57 @@
-<%= form_with(model: student) do |form| %>
-  <% if student.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
-
-      <ul>
-        <% student.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="bg-info-subtle min-vh-100 py-4 d-flex justify-content-center align-items-center">
+  <div class="card shadow-lg border-0 rounded-4" style="width: 650px; background-color: #ffffff;">
+    <div class="card-header text-white text-center rounded-top-4" style="background: linear-gradient(90deg, #0d6efd, #007bff);">
+      <h4 class="mb-0 fw-bold">
+        <%= student.new_record? ? "🎓 Add New Student" : "✏️ Edit Student Details" %>
+      </h4>
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+    <div class="card-body px-5 py-4">
+      <%= form_with(model: student) do |f| %>
 
-  <div>
-    <%= form.label :year_level, style: "display: block" %>
-    <%= form.number_field :year_level %>
-  </div>
+        <% if student.errors.any? %>
+          <div class="alert alert-danger rounded-3">
+            <strong><%= pluralize(student.errors.count, "error") %> prevented this student from being saved:</strong>
+            <ul class="mb-0">
+              <% student.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-  <div>
-    <%= form.label :program, style: "display: block" %>
-    <%= form.text_field :program %>
-  </div>
+        <div class="mb-3">
+          <%= f.label :name, class: "form-label fw-semibold" %>
+          <%= f.text_field :name, class: "form-control form-control-lg shadow-sm", placeholder: "Enter student name", style: "border-radius: 12px;" %>
+        </div>
 
-  <div>
-      <%= form.label :department_id, "Department", style: "display: block" %>
-    <%= form.collection_select :department_id, Department.all, :id, :name, prompt: "Select a department" %>
-  </div>
+        <div class="mb-3">
+          <%= f.label :year_level, class: "form-label fw-semibold" %>
+          <%= f.number_field :year_level, class: "form-control form-control-lg shadow-sm", placeholder: "Enter current year level", style: "border-radius: 12px;" %>
+        </div>
 
-  <div>
-    <%= form.submit %>
+        <div class="mb-3">
+          <%= f.label :program, class: "form-label fw-semibold" %>
+          <%= f.text_field :program, class: "form-control form-control-lg shadow-sm", placeholder: "Enter program/course", style: "border-radius: 12px;" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :department_id, "Department", class: "form-label fw-semibold" %>
+          <%= f.collection_select :department_id, Department.all, :id, :name,
+              { prompt: "Select a department" },
+              { class: "form-select form-select-lg shadow-sm", style: "border-radius: 12px;" } %>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit(student.new_record? ? "Create Student" : "Update Student",
+              class: "btn btn-lg px-5 py-2 text-white fw-bold",
+              style: "background: linear-gradient(90deg, #007bff, #00b4d8); border: none; border-radius: 12px; transition: 0.3s;" ) %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-footer bg-light text-center rounded-bottom-4">
+      <%= link_to "← Back to Students", students_path, class: "btn btn-outline-secondary btn-sm fw-semibold", style: "border-radius: 10px;" %>
+    </div>
   </div>
-<% end %>
+</div>

@@ -1,0 +1,15 @@
+<div class="text-center mt-5">
+  <h1 class="fw-bold text-primary mb-4">School Manager Portal</h1>
+  <p class="lead text-secondary mb-5">
+    A simple and efficient school management system that helps manage students, teachers, and subjects with ease.
+  </p>
+
+  <div class="d-flex justify-content-center gap-3">
+    <%= link_to "Register", new_student_path, class: "btn btn-primary btn-lg" %>
+    <%= link_to "Login", students_path, class: "btn btn-outline-primary btn-lg" %>
+  </div>
+
+  <footer class="mt-5 text-muted">
+    <small>© <%= Time.current.year %> School Manager. All rights reserved.</small>
+  </footer>
+</div>
